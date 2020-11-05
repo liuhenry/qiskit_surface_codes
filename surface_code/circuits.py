@@ -174,7 +174,7 @@ class RotatedSurfaceCodeLattice:
         appropriate logical readout value and XOR-ed syndrome locations
         according to our grid coordinate convention.
         """
-        syn_len = (d ** 2 - 1) // 2
+        syn_len = (self.d ** 2 - 1) // 2
         chunks = readout_string.split(" ")
 
         int_syndromes = [int(x, base=2) for x in chunks[-1:0:-1]]
@@ -317,3 +317,6 @@ class SurfaceCodeLogicalQubit(QuantumCircuit):
         self.h(self.__ancilla)
         self.measure(self.__ancilla, readout)
         self.barrier()
+
+    def parse_readout(self, readout_string):
+        return self.__lattice.parse_readout(readout_string)
